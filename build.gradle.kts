@@ -14,10 +14,12 @@ buildscript {
         google()
         mavenCentral()
         maven("https://www.jitpack.io")
-        maven("https://120.25.164.233:8081/nexus/content/groups/public/")
-        maven("https://maven.aliyun.com/repository/central")
-        google { url = uri("https://maven.aliyun.com/repository/google") }
-        mavenCentral { url = uri("https://maven.aliyun.com/repository/public") }
+        maven { url = uri("https://jcenter.bintray.com/") }
+        mavenCentral { url = uri("https://repo1.maven.org/maven2/") }
+//        maven("https://120.25.164.233:8081/nexus/content/groups/public/")
+//        maven("https://maven.aliyun.com/repository/central")
+//        google { url = uri("https://maven.aliyun.com/repository/google") }
+//        mavenCentral { url = uri("https://maven.aliyun.com/repository/public") }
     }
     dependencies {
         classpath("com.android.tools.build:gradle:8.0.2")
@@ -36,10 +38,12 @@ allprojects {
         google()
         mavenCentral()
         maven("https://www.jitpack.io")
-        maven("https://120.25.164.233:8081/nexus/content/groups/public/")
-        maven("https://maven.aliyun.com/repository/central")
-        google { url = uri("https://maven.aliyun.com/repository/google") }
-        mavenCentral { url = uri("https://maven.aliyun.com/repository/public") }
+        maven { url = uri("https://jcenter.bintray.com/") }
+        mavenCentral { url = uri("https://repo1.maven.org/maven2/") }
+//        maven("https://120.25.164.233:8081/nexus/content/groups/public/")
+//        maven("https://maven.aliyun.com/repository/central")
+//        google { url = uri("https://maven.aliyun.com/repository/google") }
+//        mavenCentral { url = uri("https://maven.aliyun.com/repository/public") }
     }
 //    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class.java){
 //        kotlinOptions{
