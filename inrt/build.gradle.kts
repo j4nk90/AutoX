@@ -162,6 +162,12 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.5.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0")
+
+    // UI
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+    implementation("com.bignerdranch.android:expandablerecyclerview:3.0.0-RC1")
+    implementation("com.thoughtbot:expandablerecyclerview:1.3")
+
     androidTestImplementation(libs.espresso.core) {
         exclude(group = "com.android.support", "support-annotations")
     }
