@@ -110,7 +110,7 @@ class App : Application() {
             PreferenceManager.getDefaultSharedPreferences(this)
         val keepRunningWithForegroundService = sharedPreferences.getBoolean(
             getString(R.string.key_keep_running_with_foreground_service),
-            false
+            true
         )
         if (keepRunningWithForegroundService) {
             val foregroundNotification = ForegroundNotification(
