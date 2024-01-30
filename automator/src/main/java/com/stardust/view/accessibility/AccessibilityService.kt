@@ -5,14 +5,17 @@ import android.util.Log
 import android.view.KeyEvent
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
+import android.widget.Toast
 import com.stardust.event.EventDispatcher
 
 import java.util.HashSet
 import java.util.TreeMap
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
-import java.util.concurrent.TimeUnit
-import java.util.concurrent.locks.ReentrantLock
+import java.lang.System
+import java.lang.Thread
+//import java.util.concurrent.TimeUnit
+//import java.util.concurrent.locks.ReentrantLock
 
 /**
  * Created by Stardust on 2017/5/2.
@@ -40,7 +43,6 @@ open class AccessibilityService : android.accessibilityservice.AccessibilityServ
         }
 
     override fun onAccessibilityEvent(event: AccessibilityEvent) {
-        instance = this
         // Log.v(TAG, "onAccessibilityEvent: $event");
         if (!containsAllEventTypes && !eventTypes.contains(event.eventType))
             return
@@ -99,6 +101,7 @@ open class AccessibilityService : android.accessibilityservice.AccessibilityServ
         instance = null
         mEventExecutor?.shutdownNow()
         super.onDestroy()
+        Toast.makeText(this, "AccessibilityService[OFF]", Toast.LENGTH_SHORT).show()
     }
 
 
@@ -106,10 +109,12 @@ open class AccessibilityService : android.accessibilityservice.AccessibilityServ
         Log.v(TAG, "onServiceConnected: " + serviceInfo.toString())
         instance = this
         super.onServiceConnected()
-        LOCK.lock()
-        ENABLED.signalAll()
-        LOCK.unlock()
+        // 修复下述FIXME：锁使用有误导致的BUG
+//        LOCK.lock()
+//        ENABLED.signalAll()
+//        LOCK.unlock()
         // FIXME: 2017/2/12 有时在无障碍中开启服务后这里不会调用服务也不会运行，安卓的BUG???
+        Toast.makeText(this, "AccessibilityService[ON]", Toast.LENGTH_SHORT).show()
     }
 
 
@@ -122,8 +127,8 @@ open class AccessibilityService : android.accessibilityservice.AccessibilityServ
         private val TAG = "AccessibilityService"
 
         private val mDelegates = TreeMap<Int, AccessibilityDelegate>()
-        private val LOCK = ReentrantLock()
-        private val ENABLED = LOCK.newCondition()
+//        private val LOCK = ReentrantLock()
+//        private val ENABLED = LOCK.newCondition()
         var instance: AccessibilityService? = null
             private set
         val stickOnKeyObserver = OnKeyListener.Observer()
@@ -150,21 +155,32 @@ open class AccessibilityService : android.accessibilityservice.AccessibilityServ
         fun waitForEnabled(timeOut: Long): Boolean {
             if (instance != null)
                 return true
-            LOCK.lock()
-            try {
-                if (instance != null)
-                    return true
-                if (timeOut == -1L) {
-                    ENABLED.await()
+
+            val start = System.currentTimeMillis()
+            while(true){
+                Thread.sleep(100)
+                if(instance != null){
                     return true
                 }
-                return ENABLED.await(timeOut, TimeUnit.MILLISECONDS)
-            } catch (e: InterruptedException) {
-                e.printStackTrace()
-                return false
-            } finally {
-                LOCK.unlock()
+                if(timeOut != -1L && System.currentTimeMillis() - start > timeOut){
+                    return false
+                }
             }
+//            LOCK.lock()
+//            try {
+//                if (instance != null)
+//                    return true
+//                if (timeOut == -1L) {
+//                    ENABLED.await()
+//                    return true
+//                }
+//                return ENABLED.await(timeOut, TimeUnit.MILLISECONDS)
+//            } catch (e: InterruptedException) {
+//                e.printStackTrace()
+//                return false
+//            } finally {
+//                LOCK.unlock()
+//            }
         }
     }
 
