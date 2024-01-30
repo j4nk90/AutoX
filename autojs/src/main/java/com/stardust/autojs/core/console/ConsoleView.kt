@@ -60,10 +60,8 @@ class ConsoleView : FrameLayout, LogListener {
         inflate(context, R.layout.console_view, this)
         if (attrs != null) {
             val typedArray = context.obtainStyledAttributes(attrs, R.styleable.ConsoleView)
-            typedArray.use {
-                for ((styleable, logLevel) in ATTRS) {
-                    colors.put(logLevel, it.getColor(styleable, colors[logLevel]))
-                }
+            for ((styleable, logLevel) in ATTRS) {
+                colors.put(logLevel, typedArray.getColor(styleable, colors[logLevel]))
             }
         }
         mLogListRecyclerView = findViewById(R.id.log_list)
