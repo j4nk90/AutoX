@@ -30,9 +30,9 @@ data class Versions(
     @SerializedName("IDE")
     val ide: String = "Android Studio Bumblebee | 2021.1.1",
     @SerializedName("JDK")
-    val jdk: String = "15",
+    val jdk: String = "17",
     @SerializedName("mini")
-    val mini: Int = 21,
+    val mini: Int = 24,
     @SerializedName("target")
-    val target: Int = 26
+    val target: Int = 24
 )
