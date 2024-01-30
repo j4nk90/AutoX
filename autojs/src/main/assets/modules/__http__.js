@@ -5,6 +5,14 @@ module.exports = function (runtime, scope) {
 
     http.__okhttp__ = new MutableOkHttp();
 
+    http.getTimeout = function () {
+            return http.__okhttp__.getTimeout();
+        }
+
+    http.setTimeout = function (timeout) {
+        http.__okhttp__.setTimeout(timeout);
+    }
+
     http.get = function (url, options, callback) {
         options = options || {};
         options.method = "GET";
