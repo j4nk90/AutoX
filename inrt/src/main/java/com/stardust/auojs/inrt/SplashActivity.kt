@@ -148,7 +148,7 @@ class SplashActivity : ComponentActivity() {
             Log.d(TAG, "onCreate: ${Gson().toJson(projectConfig)}")
             slug.text = projectConfig.launchConfig.splashText
             if (Pref.getHost("d") == "d") { //非第一次运行
-                Pref.setHost("112.74.161.35")
+                Pref.setHost("127.0.0.1")
                 projectConfig.launchConfig.let {
                     Pref.setHideLogs(it.isHideLogs)
                     Pref.setStableMode(it.isStableMode)
