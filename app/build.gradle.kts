@@ -163,6 +163,7 @@ android {
                 "META-INF/INDEX.LIST"
             )
         )
+        resources.merges.add("/META-INF/DEPENDENCIES")
     }
     namespace = "org.autojs.autoxjs"
 

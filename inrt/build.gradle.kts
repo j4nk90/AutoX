@@ -83,6 +83,9 @@ android {
         create("common") {
             buildConfigField("boolean", "isMarket", "false")
             manifestPlaceholders.putAll(mapOf("appName" to "inrt"))
+            packagingOptions.apply {
+                resources.merges.add("/META-INF/DEPENDENCIES")
+            }
             ndk.abiFilters.addAll(listOf("armeabi-v7a", "arm64-v8a"))
         }
         create("template") {

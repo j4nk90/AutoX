@@ -56,6 +56,8 @@ dependencies {
     // log4j
     api(group = "de.mindpipe.android", name = "android-logging-log4j", version = "1.0.3")
     api(group = "log4j", name = "log4j", version = "1.2.17")
+    // geoip2
+    api("com.maxmind.geoip2:geoip2:2.13.1")
     api(project(path = ":common"))
     api(project(path = ":automator"))
     api(project(path = ":LocalRepo:libtermexec"))
