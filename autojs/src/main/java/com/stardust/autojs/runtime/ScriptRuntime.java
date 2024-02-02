@@ -66,7 +66,7 @@ import java.lang.ref.WeakReference;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import leakcanary.AppWatcher;
+//import leakcanary.AppWatcher;
 
 
 /**
@@ -439,11 +439,11 @@ public class ScriptRuntime {
 //        ignoresException(paddle::release);
 
         // 修复：忽略AppWatcher not installed导致的异常
-        ignoresException(() -> {
-            //引用检查
-            AppWatcher.INSTANCE.getObjectWatcher().expectWeaklyReachable(this,
-                    engines.myEngine().toString() + "::" + TAG);
-        });
+//        ignoresException(() -> {
+//            //引用检查
+//            AppWatcher.INSTANCE.getObjectWatcher().expectWeaklyReachable(this,
+//                    engines.myEngine().toString() + "::" + TAG);
+//        });
     }
 
     private void ignoresException(Runnable r) {

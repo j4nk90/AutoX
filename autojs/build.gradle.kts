@@ -31,8 +31,8 @@ android {
 
 dependencies {
     androidTestImplementation(libs.espresso.core)
-    debugImplementation(libs.leakcanary.android)
-    implementation(libs.leakcanary.`object`.watcher.android)
+//    debugImplementation(libs.leakcanary.android)
+//    implementation(libs.leakcanary.`object`.watcher.android)
     testImplementation(libs.junit)
 
     implementation(libs.documentfile)
