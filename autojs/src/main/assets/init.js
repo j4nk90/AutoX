@@ -61,7 +61,7 @@ runtime.init();
     //初始化一般模块
     (function (scope) {
         var modules = ['app', 'automator', 'console', 'dialogs', 'files', 'io', 'selector', 'shell', 'web', 'ui',
-            "images", "threads", "events", "engines", "RootAutomator", "http", "storages", "floaty",
+            "images", "threads", "events", "engines", "RootAutomator", "http", "http2", "storages", "floaty",
             "sensors", "media", "plugins", "continuation", "$zip", "$base64", "$crypto", "paddle", "geoip"];
         var len = modules.length;
         for (var i = 0; i < len; i++) {

@@ -16,8 +16,9 @@ import okhttp3.Response;
 public class MutableOkHttp extends OkHttpClient {
 
     private OkHttpClient mOkHttpClient;
-    private int mMaxRetries = 3;
-    private long mTimeout = 30 * 1000;
+    private int mMaxRetries = 0;
+    private long mConnTimeout = 2 * 1000;
+    private long mTimeout = 60 * 1000;
     private Interceptor mRetryInterceptor = chain -> {
         Request request = chain.request();
         Response response = null;
@@ -54,7 +55,8 @@ public class MutableOkHttp extends OkHttpClient {
     protected OkHttpClient newClient(Builder builder) {
         builder.readTimeout(getTimeout(), TimeUnit.MILLISECONDS)
                 .writeTimeout(getTimeout(), TimeUnit.MILLISECONDS)
-                .connectTimeout(getTimeout(), TimeUnit.MILLISECONDS);
+                .connectTimeout(getConnTimeout(), TimeUnit.MILLISECONDS);
+
         for (Interceptor interceptor : getInterceptors()) {
             builder.addInterceptor(interceptor);
         }
@@ -77,9 +79,17 @@ public class MutableOkHttp extends OkHttpClient {
         return mTimeout;
     }
 
-
     public void setTimeout(long timeout) {
         mTimeout = timeout;
+        muteClient();
+    }
+
+    public long getConnTimeout() {
+        return mConnTimeout;
+    }
+
+    public void setConnTimeout(long timeout) {
+        mConnTimeout = timeout;
         muteClient();
     }
 
